@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.refactoring.analysis</groupId>
+    <artifactId>refactoring-analysis</artifactId>
+    <version>1.0</version>
+    <name>Refactoring Analysis</name>
+    <packaging>jar</packaging>
+
+
+    <properties>
+        <activejdbc.version>2.2</activejdbc.version>
+    </properties>
+
+    <repositories>
+        <!-- This local repository holds jar libraries. Use maven deploy for adding a jar library -->
+        <repository>
+            <id>maven-repository</id>
+            <url>file:///${project.basedir}/maven-repository</url>
+        </repository>
+    </repositories>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.refactoring.analysis.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>refactoring-analysis</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <outputDirectory>${project.basedir}</outputDirectory>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.javalite</groupId>
+                <artifactId>activejdbc-instrumentation</artifactId>
+                <version>${activejdbc.version}</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>instrument</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+
+        <!-- RefactoringMiner and its dependencies -->
+        <!-- Local Repositories-->
+
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.core.resources_3.10.1.v20150725-1910</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.core.contenttype_3.5.0.v20150421-2214</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.equinox.preferences_3.5.300.v20150408-1437</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.core.commands_3.7.0.v20150422-0725</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>github-api-1.84</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.core.expressions_3.5.0.v20150421-2214</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>commons-lang-2.6</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>commons-codec-1.10</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.core.jobs_3.7.0.v20150330-2103</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.core.filesystem_1.5.0.v20150725-1910</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.jdt.core_3.12.1.v20160829-0950</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.text_3.5.400.v20150505-1044</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.osgi_3.10.101.v20150820-1432</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.core.runtime_3.11.1.v20150903-1804</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.equinox.registry_3.6.0.v20150318-1503</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>RefactoringMiner</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.equinox.app_1.3.300.v20150423-1356</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.refactoring.analysis</groupId>
+            <artifactId>org.eclipse.equinox.common_3.7.0.v20150402-1709</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- Remote Repositories -->
+
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>5.0.2.201807311906-r</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-github</artifactId>
+            <version>0.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.8.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.8.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+
+        <!-- End of RefactoringMiner and its dependencies -->
+
+        <dependency>
+            <groupId>org.javalite</groupId>
+            <artifactId>activejdbc</artifactId>
+            <version>${activejdbc.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>opensymphony</groupId>
+                    <artifactId>oscache</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.34</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+
+    </dependencies>
+
+</project>
